@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
@@ -12,8 +12,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 
 import { AccountService } from '@app/_services';
 import { User } from '@app/_models';
-import { NgIf } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { AlertComponent } from '../alert/alert.component';
+
 
 @Component({
   selector: 'app-menubar',
@@ -30,18 +31,28 @@ import { AlertComponent } from '../alert/alert.component';
     MatSidenavModule,
     MatBadgeModule,
     AlertComponent,
-    NgIf, RouterLink, RouterLinkActive
+    NgIf, RouterLink, RouterLinkActive, DatePipe
   ]
 })
-export class MenubarComponent {
+export class MenubarComponent  {
   badgeVisible = false;
   openDrawer = false;
+ // currentTime: Date;
+
 
   user?: User | null;
 
   constructor(private accountService: AccountService) {
     this.accountService.user.subscribe(x => this.user = x);
     if (this.user) { this.openDrawer = true; }
+   // this.currentTime = new Date();
+    
+  }
+  ngOnInit(): void {
+    // Update the current time every second
+    setInterval(() => {
+    //  this.currentTime = new Date();
+    }, 1000);
   }
 
   logout() {
@@ -52,4 +63,8 @@ export class MenubarComponent {
   badgeVisibility() {
     this.badgeVisible = true;
   }
+  
 }
+
+
+

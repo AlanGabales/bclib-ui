@@ -5,3 +5,8 @@ export * from './student.service';
 export * from './category.service';
 export * from './author.service';
 export * from './publisher.service';
+export * from './course.service';
+export * from './employee.service';
+export * from './borrow_record.service';
+export * from './accession.service';
+export * from './role.service';

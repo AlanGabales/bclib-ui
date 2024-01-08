@@ -1,0 +1,73 @@
+
+  
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-header><h2 style="margin-top: 1%; margin-left: 1%;">{{title}}</h2></mat-card-header>
+        <mat-card-content>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Course Name</mat-label>
+                <input type="text" (keypress)="onKeypressnumber($event)"  formControlName="course_name" [ngClass]="{ 'is-invalid': submitted && f.course_name.errors }" matInput />
+                <mat-error *ngIf="submitted && f.course_name.errors">
+                    <span *ngIf="f.course_name.errors.required">Course Name is required</span>
+                </mat-error>
+            </mat-form-field>
+           
+            <mat-form-field class="mat-50">
+                <mat-label>Code</mat-label>
+                <input type="text" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }" matInput />
+                <mat-error *ngIf="submitted && f.code.errors">
+                    <span *ngIf="f.code.errors.required">Code is required</span>
+                </mat-error>
+            </mat-form-field>
+             <!--
+            <mat-form-field>
+                <mat-label>Select Status</mat-label>
+                <mat-select [(value)]="selectedStatus">
+                  <mat-option value="good">Good</mat-option>
+                  <mat-option value="damaged">Damaged</mat-option>
+                </mat-select>
+              </mat-form-field>
+            
+              <mat-form-field *ngIf="selectedStatus === 'damaged'">
+                <input matInput placeholder="Fee for Damaged Item" name="fee">
+              </mat-form-field>
+              -->
+            <!--
+            <mat-form-field class="mat-50">
+                <mat-label>Description</mat-label>
+                <textarea formControlName="description" matInput></textarea>
+            </mat-form-field>
+            
+            <mat-form-field class="mat-100">
+                <mat-label>Status</mat-label>
+                <select matNativeControl required formControlName="status" matInput>
+                    <option value="Enabled">Enabled</option>
+                    <option value="Disabled">Disabled</option>
+                </select>
+                <mat-error *ngIf="submitted && f.status.errors">
+                    <span *ngIf="f.status.errors.required">Status is required</span>
+                </mat-error>
+            </mat-form-field>
+        -->
+        <mat-form-field class="mat-50">
+            <mat-label>Status</mat-label>
+            <mat-select matNativeControl required formControlName="status" matInput>
+              <mat-option value="Enabled">Enabled</mat-option>
+              <mat-option value="Disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field>
+        
+        </mat-card-content>
+        <mat-card-footer>
+            <div style="margin: 2%; text-align: right;">
+                <button mat-raised-button type="submit" color="primary" [disabled]="submitting">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    <span *ngIf="id">Update</span>
+                    <span *ngIf="!id">Save</span>
+                </button>
+                <a routerLink="/course" class="btn btn-link">Cancel</a>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</form>

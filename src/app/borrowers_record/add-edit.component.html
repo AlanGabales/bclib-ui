@@ -1,0 +1,328 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-header><h2 style="margin-top: 1%; margin-left: 1%;">{{title}}</h2></mat-card-header>
+        <mat-card-content>
+            
+            <!--
+            <mat-form-field class="mat-50">
+                <mat-label>Borrower Type</mat-label>
+                <select matNativeControl required formControlName="borrower_type" matInput>
+                    <option value="Student">Student</option>
+                    <option value="Employee">Employee</option>
+                </select>
+                <mat-error *ngIf="submitted && f.borrower_type.errors">
+                    <span *ngIf="f.borrower_type.errors.required">Borrower Type is required</span>
+                </mat-error>
+            </mat-form-field>
+            -->
+            <mat-form-field class="mat-50">
+                <mat-label>Borrower Type</mat-label>
+                <mat-select matNativeControl required formControlName="borrower_type" matInput>
+                  <mat-option value="Student">Student</mat-option>
+                  <mat-option value="Employee">Faculty</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Student</mat-label>
+                <input type="text" (keypress)="onKeypressnumber($event)"
+                        placeholder="Select..."
+                        aria-label="Student"
+                        [ngClass]="{ 'is-invalid': submitted && f.student.errors }"
+                        matInput
+                        [matAutocomplete]="autoStu"
+                        formControlName="student"
+                    >
+                <mat-autocomplete autoActiveFirstOption #autoStu="matAutocomplete" [displayWith]="displayFnStu">
+                <mat-option *ngFor="let option of filteredOptionsStu | async" [value]="option">
+                    {{option.full_name}}
+                </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="submitted && f.student.errors">
+                    <span *ngIf="f.student.errors.required">Student is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Faculty</mat-label>
+                <input type="text" (keypress)="onKeypressnumber($event)"
+                        placeholder="Select..."
+                        aria-label="Employee"
+                        [ngClass]="{ 'is-invalid': submitted && f.employee.errors }"
+                        matInput
+                        [matAutocomplete]="autoEmp"
+                        formControlName="employee"
+                    >
+                <mat-autocomplete autoActiveFirstOptions #autoEmp="matAutocomplete" [displayWith]="displayFnEmp">
+                <mat-option *ngFor="let option of filteredOptionsEmp | async" [value]="option">
+                    {{option.full_name}}
+                </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="submitted && f.employee.errors">
+                    <span *ngIf="f.employee.errors.required">Employee is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Book Title</mat-label>
+                <input type="text"
+                        placeholder="Select..."
+                        aria-label="Book"
+                        [ngClass]="{ 'is-invalid': submitted && f.book.errors }"
+                        matInput
+                        [matAutocomplete]="autoBook"
+                        formControlName="book"
+                    >
+                <mat-autocomplete autoActiveFirstOption #autoBook="matAutocomplete" [displayWith]="displayFnBook">
+                <mat-option *ngFor="let option of filteredOptionsBook | async" [value]="option">
+                    {{option.title}}
+                </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="submitted && f.book.errors">
+                    <span *ngIf="f.book.errors.required">Book title is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            
+<!--
+            <mat-form-field class="mat-50">
+                <mat-label>Name</mat-label>
+                <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" matInput />
+                <mat-error *ngIf="submitted && f.name.errors">
+                    <span *ngIf="f.name.errors.required">Name is required</span>
+                </mat-error>
+            </mat-form-field> 
+
+            <mat-form-field class="mat-50">
+                <mat-label>Employee</mat-label>
+                <input type="text"
+                        placeholder="Select..."
+                        aria-label="Employee"
+                        [ngClass]="{ 'is-invalid': submitted && f.employee.errors }"
+                        matInput
+                        [matAutocomplete]="auto"
+                        formControlName="employee"
+                    >
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.name}}
+                </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="submitted && f.employee.errors">
+                    <span *ngIf="f.employee.errors.required">Employee is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Publisher</mat-label>
+                <input type="text"
+                        placeholder="Select..."
+                        aria-label="Publisher"
+                        [ngClass]="{ 'is-invalid': submitted && f.employee.errors }"
+                        matInput
+                        [matAutocomplete]="autoPub"
+                        formControlName="publisher"
+                    >
+                <mat-autocomplete autoActiveFirstOption #autoPub="matAutocomplete" [displayWith]="displayFnPub">
+                <mat-option *ngFor="let option of filteredOptionsPub | async" [value]="option">
+                    {{option.name}}
+                </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="submitted && f.publisher.errors">
+                    <span *ngIf="f.publisher.errors.required">Publisher is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Accession Book No.</mat-label>
+                <input type="text" formControlName="access_book_num" [ngClass]="{ 'is-invalid': submitted && f.access_book_num.errors }" matInput />
+                <mat-error *ngIf="submitted && f.access_book_num.errors">
+                    <span *ngIf="f.access_book_num.errors.required">Accession Book No. is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Employee Number</mat-label>
+                <input type="text" formControlName="employee_number" [ngClass]="{ 'is-invalid': submitted && f.employee_number.errors }" matInput />
+                <mat-error *ngIf="submitted && f.employee_number.errors">
+                    <span *ngIf="f.employee_number.errors.required">Athor number is required</span>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="mat-50">
+                <mat-label>Classification</mat-label>
+                <input type="text" formControlName="classification" [ngClass]="{ 'is-invalid': submitted && f.classification.errors }" matInput />
+                <mat-error *ngIf="submitted && f.classification.errors">
+                    <span *ngIf="f.classification.errors.required">Class is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Title</mat-label>
+                <input type="text" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" matInput />
+                <mat-error *ngIf="submitted && f.title.errors">
+                    <span *ngIf="f.title.errors.required">Title is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Edition</mat-label>
+                <input type="text" formControlName="edition" [ngClass]="{ 'is-invalid': submitted && f.edition.errors }" matInput />
+                <mat-error *ngIf="submitted && f.edition.errors">
+                    <span *ngIf="f.edition.errors.required">Edition is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Volumes</mat-label>
+                <input type="text" formControlName="volumes" [ngClass]="{ 'is-invalid': submitted && f.volumes.errors }" matInput />
+                <mat-error *ngIf="submitted && f.volumes.errors">
+                    <span *ngIf="f.volumes.errors.required">Volumes is required</span>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="mat-50">
+                <mat-label>Pages</mat-label>
+                <input type="text" formControlName="pages" [ngClass]="{ 'is-invalid': submitted && f.pages.errors }" matInput />
+                <mat-error *ngIf="submitted && f.pages.errors">
+                    <span *ngIf="f.pages.errors.required">Pages is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Source of fund</mat-label>
+                <input type="text" formControlName="source_of_fund" [ngClass]="{ 'is-invalid': submitted && f.source_of_fund.errors }" matInput />
+                <mat-error *ngIf="submitted && f.source_of_fund.errors">
+                    <span *ngIf="f.source_of_fund.errors.required">Source of fund is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Cost price</mat-label>
+                <input type="text" formControlName="cost_price" [ngClass]="{ 'is-invalid': submitted && f.cost_price.errors }" matInput />
+                <mat-error *ngIf="submitted && f.cost_price.errors">
+                    <span *ngIf="f.cost_price.errors.required">Cost price is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Year</mat-label>
+                <input type="text" formControlName="year" [ngClass]="{ 'is-invalid': submitted && f.year.errors }" matInput />
+                <mat-error *ngIf="submitted && f.year.errors">
+                    <span *ngIf="f.year.errors.required">Year is required</span>
+                </mat-error>
+            </mat-form-field>
+     
+            <mat-form-field class="mat-50">
+                <mat-label>Remarks</mat-label>
+                <input type="text" formControlName="remarks" [ngClass]="{ 'is-invalid': submitted && f.remarks.errors }" matInput />
+                <mat-error *ngIf="submitted && f.remarks.errors">
+                    <span *ngIf="f.remarks.errors.required">Remarks is required</span>
+                </mat-error>
+            </mat-form-field>
+       
+          
+            <mat-form-field class="mat-50">
+                <mat-label>Description</mat-label>
+                <textarea formControlName="description" matInput></textarea>
+            </mat-form-field>
+           
+            <mat-form-field class="mat-50">
+                <mat-label>Date Borrowed</mat-label>
+                <input type="date" formControlName="date_borrowed"
+                    [ngClass]="{ 'is-invalid': submitted && f.date_borrowed.errors }" matInput />
+                <mat-error *ngIf="submitted && f.date_borrowed.errors">
+                    <span *ngIf="f.date_borrowed.errors.required">Date Borrowed is required</span>
+                </mat-error>
+            </mat-form-field>   
+
+            <mat-form-field class="mat-50">
+                <mat-label>Date returned</mat-label>
+                <input type="date" formControlName="date_returned"
+                    [ngClass]="{ 'is-invalid': submitted && f.date_returned.errors }" matInput />
+                <mat-error *ngIf="submitted && f.date_returned.errors">
+                    <span *ngIf="f.date_returned.errors.required">Date returned is required</span>
+                </mat-error>
+            </mat-form-field> -->
+
+            <mat-form-field class="mat-50">
+                <mat-label>Date returned</mat-label>
+                <input  [matDatepicker]="picker"  formControlName="date_returned"
+                [ngClass]="{ 'is-invalid': submitted && f.date_returned.errors }" matInput />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+           
+       
+              <!--
+            <mat-form-field class="mat-50">
+                <mat-label>Book Status</mat-label>
+                <select matNativeControl required formControlName="books_status" matInput>
+                    <option value="Checked Out">Checked Out</option>
+                    <option value="Returned">Returned</option>
+                </select>
+                <mat-error *ngIf="submitted && f.books_status.errors">
+                    <span *ngIf="f.books_status.errors.required">Status is required</span>
+                </mat-error>
+            </mat-form-field>
+            -->
+
+            <mat-form-field class="mat-50">
+                <mat-label>Status</mat-label>
+                <mat-select matNativeControl required formControlName="books_status" matInput>
+                  <mat-option  value="Checked Out">Checked Out</mat-option>
+                  <mat-option value="Returned">Returned</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!--
+            <mat-form-field class="mat-50">
+                <mat-label>Return Status</mat-label>
+                <select matNativeControl formControlName="return_status" matInput>
+                    <option value="Good">Good</option>
+                    <option value="Damaged">Damaged</option>
+                    <option value="Lost">Lost</option>
+                </select> 
+                <mat-error *ngIf="submitted && f.return_status.errors">
+                    <span *ngIf="f.return_status.errors.required">Status is required</span>
+                </mat-error>
+            </mat-form-field>
+                -->
+
+                <mat-form-field class="mat-50">
+                    <mat-label>Return Status</mat-label>
+                    <mat-select matNativeControl required formControlName="return_status" matInput>
+                      <mat-option  value="Good">Good</mat-option>
+                      <mat-option  value="Damaged">Damaged</mat-option>
+                      <mat-option value="Lost">Lost</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+            <mat-form-field class="mat-50">
+                <mat-label>Fee</mat-label>
+                <input type="number" (keypress)="onKeypress($event)"   formControlName="fee" [ngClass]="{ 'is-invalid': submitted && f.fee.errors }" matInput />
+                <mat-error *ngIf="submitted && f.fee.errors">
+                    <span *ngIf="f.fee.errors.required">Fee is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-100">
+                <mat-label>Remarks</mat-label>
+                <textarea formControlName="remarks" matInput></textarea>
+            </mat-form-field>
+          
+        </mat-card-content>
+        <mat-card-footer>
+            <div style="margin: 2%; text-align: right;">
+                <button mat-raised-button type="submit" color="primary" [disabled]="submitting">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    <span *ngIf="id">Update</span>
+                    <span *ngIf="!id">Save</span>
+                </button>
+                <a routerLink="/borrowers-record" class="btn btn-link">Cancel</a>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</form>

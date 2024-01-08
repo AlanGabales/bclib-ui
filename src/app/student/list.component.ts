@@ -27,11 +27,11 @@ import { TableUtil } from '@app/_helpers/table.util';
         MatIconModule
     ]
 })
-export class ListComponent implements OnInit {
+export class StudentComponent implements OnInit {
 
     students?: Student[];
     dataSource: any;
-    displayedColumns: string[] = ['id', 'name', 'status', 'action'];
+    displayedColumns: string[] = ['student_id', 'full_name', 'year_level', 'course', 'status', 'action'];
     @ViewChild(MatPaginator) paginator !:MatPaginator;
     @ViewChild(MatSort) sort !:MatSort;
     

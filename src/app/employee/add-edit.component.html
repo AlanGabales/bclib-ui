@@ -1,0 +1,101 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card>
+        <mat-card-header>
+            <h2 style="margin-top: 1%; margin-left: 1%;">{{title}}</h2>
+        </mat-card-header>
+        <mat-card-content>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Faculty ID</mat-label>
+                <input type="text" formControlName="employee_id"
+                    [ngClass]="{ 'is-invalid': submitted && f.employee_id.errors }" matInput />
+                <mat-error *ngIf="submitted && f.employee_id.errors">
+                    <span *ngIf="f.employee_id.errors.required">Employee ID is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>First Name</mat-label>
+                <input type="text" formControlName="first_name"
+                    [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" matInput />
+                <mat-error *ngIf="submitted && f.first_name.errors">
+                    <span *ngIf="f.first_name.errors.required">First Name is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mat-50">
+                <mat-label>Last Name</mat-label>
+                <input type="text" formControlName="last_name"
+                    [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" matInput />
+                <mat-error *ngIf="submitted && f.last_name.errors">
+                    <span *ngIf="f.last_name.errors.required">Last Name is required</span>
+                </mat-error>
+            </mat-form-field>
+            <!--
+            <mat-form-field class="mat-50">
+                <mat-label>Full name</mat-label>
+                <input type="text" formControlName="full_name"
+                    [ngClass]="{ 'is-invalid': submitted && f.full_name.errors }" matInput />
+                <mat-error *ngIf="submitted && f.full_name.errors">
+                    <span *ngIf="f.full_name.errors.required">Full Name is required</span>
+                </mat-error>
+            </mat-form-field>
+            -->
+            <mat-form-field class="mat-50">
+                <mat-label>Course</mat-label>
+                <input type="text" (keypress)="onKeypressnumber($event)"
+                        placeholder="Select..."
+                        aria-label="Course"
+                        [ngClass]="{ 'is-invalid': submitted && f.course.errors }"
+                        matInput
+                        [matAutocomplete]="autocur"
+                        formControlName="course"
+                    >
+                <mat-autocomplete autoActiveFirstOption #autocur="matAutocomplete" [displayWith]="displayFnCur">
+                <mat-option *ngFor="let option of filteredOptionsCur | async" [value]="option">
+                    {{option.course_name}}
+                </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="submitted && f.course.errors">
+                    <span *ngIf="f.course.errors.required">Course is required</span>
+                </mat-error>
+            </mat-form-field>
+
+            <!--
+            <mat-form-field class="mat-50">
+                <mat-label>Description</mat-label>
+                <textarea formControlName="description" matInput></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="mat-100">
+                <mat-label>Status</mat-label>
+                <select matNativeControl required formControlName="status" matInput>
+                    <option value="Enabled">Enabled</option>
+                    <option value="Disabled">Disabled</option>
+                </select>
+                <mat-error *ngIf="submitted && f.status.errors">
+                    <span *ngIf="f.status.errors.required">Status is required</span>
+                </mat-error>
+            </mat-form-field>
+        -->
+        <mat-form-field class="mat-50">
+            <mat-label>Status</mat-label>
+            <mat-select matNativeControl required formControlName="status" matInput>
+              <mat-option value="Enabled">Enabled</mat-option>
+              <mat-option value="Disabled">Disabled</mat-option>
+            </mat-select>   
+        </mat-form-field>
+        
+        </mat-card-content>
+        <mat-card-footer>
+            <div style="margin: 2%; text-align: right;">
+                <button mat-raised-button type="submit" color="primary" [disabled]="submitting">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    <span *ngIf="id">Update</span>
+                    <span *ngIf="!id">Save</span>
+                </button>
+                <a routerLink="/employee" class="btn btn-link">Cancel</a>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</form>

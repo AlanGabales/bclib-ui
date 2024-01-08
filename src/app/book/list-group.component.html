@@ -1,0 +1,34 @@
+<mat-card style="margin: 1%">
+    <h2 style="margin-top: 1%; margin-left: 1%;">Books ~ Report</h2>
+    <mat-card-header>
+        <mat-form-field>
+            <input matInput (keyup)="filterChange($event)" placeholder="Search here..." />
+        </mat-form-field>
+        <!-- <button style="margin-left: 74%;" routerLink="add" mat-raised-button color="primary">Create</button> -->
+        <button style="margin-left: 1%;" mat-raised-button color="warn"
+            (click)="exportTable()"><mat-icon>grid_on</mat-icon>Export</button>
+    </mat-card-header>
+    <mat-card-content>
+        <section class="example-container mat-elevation-z8" tabindex="0">
+            <table id="books" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                <ng-container matColumnDef="title">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Title </th>
+                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                    <th mat-sort-header mat-header-cell *matHeaderCellDef> Quantity </th>
+                    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            </table>
+        </section>
+    </mat-card-content>
+    <br>
+    <mat-card-footer>
+        <mat-paginator [pageSize]="10" [pageSizeOptions]="[10,20,50]" showFirstLastButtons></mat-paginator>
+    </mat-card-footer>
+</mat-card>

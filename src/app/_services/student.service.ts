@@ -17,6 +17,9 @@ export class StudentService {
     getAll() {
         return this.http.get<Student[]>(`${environment.apiUrl}/students`);
     }
+    getAllEnabled() {
+        return this.http.get<Student[]>(`${environment.apiUrl}/students/enabled`);
+    }
 
     create(student: Student) {
         return this.http.post(`${environment.apiUrl}/students`, student);

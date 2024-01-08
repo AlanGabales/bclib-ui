@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 
-import { ListComponent } from './list.component';
-import { AddEditComponent } from './add-edit.component';
+import { StudentComponent } from './list.component';
+import { StudentAddEditComponent } from './add-edit.component';
 
 export const STUDENTS_ROUTES: Routes = [
-    { path: '', component: ListComponent },
-    { path: 'add', component: AddEditComponent },
-    { path: 'edit/:id', component: AddEditComponent }
+    { path: '', component: StudentComponent },
+    { path: 'add', component: StudentAddEditComponent },
+    { path: 'edit/:id', component: StudentAddEditComponent }
 ];

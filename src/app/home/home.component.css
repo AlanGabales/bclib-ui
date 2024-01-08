@@ -1,0 +1,30 @@
+.custom-box1 {
+  background-color: rgb(0, 6, 128);
+  
+}
+.custom-box2 {
+  background-color: rgb(14, 107, 93);
+  
+}
+.custom-box3 {
+  background-color: rgb(201, 75, 75);
+  
+}
+
+mat-toolbar {
+  margin-bottom: 20px;
+}
+
+mat-grid-list {
+  margin: 0;
+}
+
+mat-grid-tile {
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+h2 {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}

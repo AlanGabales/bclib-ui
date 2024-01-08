@@ -10,9 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { first } from 'rxjs/operators';
 
 import { AccountService } from '@app/_services';
-import { Role } from '@app/_helpers/enums/role';
 import { Status } from '@app/_helpers/enums/status';
 import { AlertService } from '@app/_components/alert/alert.service';
+import { UsersRole } from '@app/_helpers/enums/role';
 
 @Component({ 
     templateUrl: 'add-edit.component.html',
@@ -55,7 +55,7 @@ export class AddEditComponent implements OnInit {
             last_name: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            role: [Role.User, Validators.required],
+            role: [UsersRole.STUDENT, Validators.required],
             status: [Status.ENABLED, Validators.required],
             // password only required in add mode
             password: ['', [Validators.minLength(6), ...(!this.id ? [Validators.required] : [])]]
@@ -111,4 +111,12 @@ export class AddEditComponent implements OnInit {
             ? this.accountService.update(this.id!, this.form.value)
             : this.accountService.register(this.form.value);
     }
+
+    //restrick the number
+    onKeypressnumber(event: KeyboardEvent) {
+        const charCode = event.charCode;
+        if (/[0-9]/.test(String.fromCharCode(charCode))) {
+          event.preventDefault();
+        }
+      }
 }

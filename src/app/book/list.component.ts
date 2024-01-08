@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, CommonModule, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { first } from 'rxjs/operators';
 
@@ -15,6 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { Book } from '@app/_models';
 import { BookService } from '@app/_services/book.service';
 import { TableUtil } from '@app/_helpers/table.util';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CategoryListComponent } from '@app/category/list.component';
+import { PublisherComponent } from '@app/publisher/list.component';
+import { AuthorComponent } from '@app/author/list.component';
+import { CategoryAddEditComponent } from '@app/category/add-edit.component';
 
 @Component({ 
     selector: 'book-list-component',
@@ -22,20 +27,22 @@ import { TableUtil } from '@app/_helpers/table.util';
     styleUrls: ['books.component.css'],
     standalone: true,
     imports: [
-        RouterLink, NgFor, NgIf,
+        RouterLink, NgFor, NgIf, CommonModule,
         MatCardModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatTableModule, MatPaginatorModule, MatSortModule,
-        MatIconModule
-    ]
+        MatIconModule, MatTabsModule, CategoryListComponent, PublisherComponent, AuthorComponent, CategoryAddEditComponent
+    ],
+    providers: [DatePipe]
 })
-export class ListComponent implements OnInit {
+export class BookComponent implements OnInit {
 
     books?: Book[];
     dataSource: any;
-    displayedColumns: string[] = ['id', 'category', 'name', 'author', 'publisher', 'status', 'action'];
+    displayedColumns: string[] = ['accession','number', 'category', 'title', 'author', 'classification', 'book_status', 'action'];
     @ViewChild(MatPaginator) paginator !:MatPaginator;
     @ViewChild(MatSort) sort !:MatSort;
     
-    constructor(private bookService: BookService) {}
+    constructor(private bookService: BookService,
+        public datePipe: DatePipe) {}
 
     ngOnInit() {
         this.getBooks();
@@ -49,6 +56,15 @@ export class ListComponent implements OnInit {
                 this.dataSource = new MatTableDataSource<Book>(this.books);
                 this.dataSource.paginator=this.paginator;
                 this.dataSource.sort=this.sort;
+                this.dataSource.filterPredicate = (data: any, filter: string) => {
+                    console.log('data...', data.category)
+                    return data.author?.full_name?.toLocaleLowerCase().includes(filter) ||
+                    data.category?.name?.toLocaleLowerCase().includes(filter) ||//for feltering 
+                    data.publisher?.name?.toLocaleLowerCase().includes(filter)||
+                    data.book_status.toLocaleLowerCase().includes(filter)||
+                    data.title.toLocaleLowerCase().includes(filter)||
+                    data.accession?.name?.toLocaleLowerCase().includes(filter);
+                }
             });
     }
 

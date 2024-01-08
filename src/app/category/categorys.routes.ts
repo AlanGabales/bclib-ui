@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { ListComponent } from './list.component';
-import { AddEditComponent } from './add-edit.component';
+import { CategoryAddEditComponent } from './add-edit.component';
+import { CategoryListComponent } from './list.component';
 
 export const CATEGORYS_ROUTES: Routes = [
-    { path: '', component: ListComponent },
-    { path: 'add', component: AddEditComponent },
-    { path: 'edit/:id', component: AddEditComponent }
+    { path: '', component: CategoryListComponent },
+    { path: 'addcategory', component: CategoryAddEditComponent },
+    { path: 'editcategory/:id', component: CategoryAddEditComponent }
+    
 ];

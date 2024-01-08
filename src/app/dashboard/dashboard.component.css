@@ -1,0 +1,35 @@
+.custom-box1 {
+  background-color: rgb(0, 6, 128);
+  
+}
+.custom-box2 {
+  background-color: rgb(14, 107, 93);
+
+}
+.custom-box3 {
+  background-color: rgb(201, 75, 75);
+  
+}
+
+.border-left-primary {
+  border-left: 0.25rem solid #4e73df !important;
+}
+
+.border-left-success {
+  border-left: 0.25rem solid #1cc88a !important;
+}
+
+.border-left-warning {
+  border-left: 0.25rem solid #f6c23e !important;
+}
+
+.border-left-secondary {
+  border-left: 0.25rem solid #6c757d !important;
+}
+
+.text-xs {
+  font-size: .9rem;
+}
+
+
+

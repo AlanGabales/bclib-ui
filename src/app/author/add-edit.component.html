@@ -4,18 +4,34 @@
         <mat-card-content>
 
             <mat-form-field class="mat-50">
-                <mat-label>Name</mat-label>
-                <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" matInput />
-                <mat-error *ngIf="submitted && f.name.errors">
-                    <span *ngIf="f.name.errors.required">Name is required</span>
+                <mat-label>Full Name</mat-label>
+                <input type="text" (keypress)="onKeypressnumber($event)" formControlName="full_name" [ngClass]="{ 'is-invalid': submitted && f.full_name.errors }" matInput />
+                <mat-error *ngIf="submitted && f.full_name.errors">
+                    <span *ngIf="f.full_name.errors.required">Full Name is required</span>
                 </mat-error>
             </mat-form-field>
-
+            <mat-form-field class="mat-50">
+                <mat-label>Number</mat-label>
+                <!-- <input type="number" formControlName="number" [ngClass]="{ 'is-invalid': submitted && f.number.errors }" matInput /> -->
+                <input
+                  type="number" (keypress)="onKeypress($event)"
+                  formControlName="number"
+                  [ngClass]="{ 'is-invalid': submitted && f.number.errors }"
+                  matInput
+                  min="0"
+                  #input
+                  OnlyNumber="true"
+                />
+                <mat-error *ngIf="submitted && f.number.errors">
+                  <span *ngIf="f.number.errors.required"> Number is required</span>
+                </mat-error>
+              </mat-form-field>
+            <!--
             <mat-form-field class="mat-50">
                 <mat-label>Description</mat-label>
                 <textarea formControlName="description" matInput></textarea>
             </mat-form-field>
-
+            -->
             <mat-form-field class="mat-50">
                 <mat-label>Status</mat-label>
                 <select matNativeControl required formControlName="status" matInput>

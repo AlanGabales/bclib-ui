@@ -1,12 +1,12 @@
-<mat-toolbar color="primary" class="mat-elevation-z8">
+<mat-toolbar color="primary" class="mat-elevation-z8" class="sticky-toolbar" >
     <button (click)="drawer.toggle()" mat-icon-button>
         <mat-icon>menu</mat-icon>
     </button>
-    <span>Benedicto College Library System</span>
+    <span>Benedicto College Library System </span>
+   <!-- <span class="currentTime">Current Time: {{ currentTime | date:'hh:mm:ss a' }}</span>-->
     <span class="example-spacer"></span>
-
     <button routerLink="" mat-button>Home</button>
-    
+
     <!-- <button [matMenuTriggerFor]="inventory" mat-button>Inventory</button>
     <mat-menu #inventory="matMenu">
         <button mat-menu-item routerLink="/product-inventories">Product</button>
@@ -18,12 +18,13 @@
         <button mat-menu-item routerLink="/orders">Order</button>
     </mat-menu> -->
 
-    <button [matMenuTriggerFor]="account" mat-button *ngIf="user"><mat-icon>account_circle</mat-icon>{{user.user?.username}}</button>
+    <button [matMenuTriggerFor]="account" mat-button
+        *ngIf="user"><mat-icon>account_circle</mat-icon>{{user.user?.username}}</button>
     <mat-menu #account="matMenu">
         <button mat-menu-item routerLink="/users/profile/{{user?.user?.id}}">Profile</button>
         <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
-    
+
     <!-- <button [matMenuTriggerFor]="lvl1master" routerLink="" mat-button>Master</button> -->
     <!-- <mat-menu #lvl1master="matMenu">
         <button [matMenuTriggerFor]="company" mat-menu-item>Company</button>
@@ -61,14 +62,15 @@
         <mat-icon matBadge="15" [matBadgeHidden]="badgeVisible" matBadgeColor="warn">notifications</mat-icon>
     </button> -->
 </mat-toolbar>
-<mat-drawer-container>
+<mat-drawer-container class="sticky-container" >
     <mat-drawer #drawer opened="{{openDrawer}}" mode="side">
         <mat-nav-list>
             <mat-list-item>
-                <button routerLink="/" mat-button><mat-icon>home</mat-icon>Home</button>
+                <button class="button" routerLink="/" mat-button><mat-icon>dashboard</mat-icon>Dashboard</button>
             </mat-list-item>
             <mat-list-item>
-                <button mat-button routerLink="/books" routerLinkActive="active"><mat-icon>library_books</mat-icon>Books</button>
+                <button mat-button routerLink="/books"
+                    routerLinkActive="active"><mat-icon>library_books</mat-icon>Books</button>
             </mat-list-item>
             <!-- <div mat-subheader>Inventory</div> -->
             <!-- <mat-list-item>
@@ -85,22 +87,54 @@
                 <button mat-button routerLink="/orders"><mat-icon>restaurant</mat-icon>Order</button>
             </mat-list-item> -->
             <div mat-subheader>Settings</div>
-            <mat-list-item>
+            <mat-list-item >
                 <button mat-button routerLink="/users"><mat-icon>person</mat-icon>Users</button>
             </mat-list-item>
+            <!--
             <mat-list-item>
-                <button mat-button routerLink="/categorys" routerLinkActive="active"><mat-icon>category</mat-icon>Categories</button>
+                <button mat-button routerLink="/role"
+                    routerLinkActive="active"><mat-icon>person</mat-icon>Users Role</button>
+            </mat-list-item>
+            -->
+            <mat-list-item>
+                <button mat-button routerLink="/categorys"
+                    routerLinkActive="active"><mat-icon>category</mat-icon>Categories</button>
             </mat-list-item>
             <mat-list-item>
-                <button mat-button routerLink="/authors" routerLinkActive="active"><mat-icon>person_outline</mat-icon>Authors</button>
+                <button mat-button routerLink="/authors"
+                    routerLinkActive="active"><mat-icon>person_outline</mat-icon>Authors</button>
             </mat-list-item>
+           
             <mat-list-item>
-                <button mat-button routerLink="/publishers" routerLinkActive="active"><mat-icon>publish</mat-icon>Publishers</button>
+                <button mat-button routerLink="/publishers"
+                    routerLinkActive="active"><mat-icon>publish</mat-icon>Publishers</button>
             </mat-list-item>
+      
             <mat-list-item>
-                <button mat-button routerLink="/students" routerLinkActive="active"><mat-icon>person</mat-icon>Students</button>
+                <button mat-button routerLink="/accessions"
+                    routerLinkActive="active"><mat-icon>book</mat-icon>Accessions</button>
             </mat-list-item>
-            <!-- <mat-list-item>
+      
+            <mat-list-item>
+                <button mat-button routerLink="/students"
+                    routerLinkActive="active"><mat-icon>person</mat-icon>Students</button>
+            </mat-list-item>    
+            <mat-list-item>
+                <button mat-button  routerLink="/course"
+                    routerLinkActive="active"><mat-icon>school</mat-icon>Courses</button>
+            </mat-list-item>
+
+            <mat-list-item>
+                <button mat-button routerLink="/employee"
+                    routerLinkActive="active"><mat-icon>people</mat-icon>Faculty</button>
+            </mat-list-item>
+          
+            <mat-list-item>
+                <button mat-button routerLink="/borrowers-record"
+                    routerLinkActive="active"><mat-icon>collections_bookmark</mat-icon> Borrowers Record</button>
+            </mat-list-item>
+            <!-- <mat-list-it
+             <mat-list-item>
                 <button mat-button routerLink="/banks"><mat-icon>account_balance</mat-icon>Banks</button>
             </mat-list-item> -->
             <!-- <mat-list-item>
@@ -108,14 +142,15 @@
             </mat-list-item> -->
             <!-- <mat-list-item>
                 <button mat-button><mat-icon>settings</mat-icon>Settings</button>
-            </mat-list-item> -->
+            </mat-list-item>
             <mat-list-item>
                 <button mat-button><mat-icon>help</mat-icon>Help</button>
             </mat-list-item>
+             -->
         </mat-nav-list>
     </mat-drawer>
-    <mat-drawer-content>
-        <div style="min-height: 800px;">
+    <mat-drawer-content >
+        <div style="min-height: 500px;">
             <alert></alert>
             <router-outlet></router-outlet>
         </div>
@@ -123,5 +158,5 @@
             <p>Copyright © 2023<a target="_blank" href="https://bclib.org/">&nbsp;BC</a>. All Rights Reserved</p>
         </footer>
     </mat-drawer-content>
-    
+
 </mat-drawer-container>

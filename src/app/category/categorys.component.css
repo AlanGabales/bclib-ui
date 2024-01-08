@@ -25,3 +25,13 @@ mat-card {
 .mat-column-description {
     width: 20%;
 }
+
+.example-container {
+    height:500px;
+    overflow: auto;
+  
+}
+
+table {
+    width: 100%;
+}

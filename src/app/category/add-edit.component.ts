@@ -24,7 +24,7 @@ import { AlertService } from '@app/_components/alert/alert.service';
         MatSelectModule
     ]
 })
-export class AddEditComponent implements OnInit {
+export class CategoryAddEditComponent implements OnInit {
     form!: FormGroup;
     id?: string;
     title!: string;
@@ -105,4 +105,11 @@ export class AddEditComponent implements OnInit {
             ? this.categoryService.update(this.id!, this.form.value)
             : this.categoryService.create(this.form.value);
     }
+    //restrick the number
+    onKeypressnumber(event: KeyboardEvent) {
+        const charCode = event.charCode;
+        if (/[0-9]/.test(String.fromCharCode(charCode))) {
+          event.preventDefault();
+        }
+      }
 }

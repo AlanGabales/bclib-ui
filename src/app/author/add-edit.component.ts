@@ -50,8 +50,9 @@ export class AddEditComponent implements OnInit {
 
         // form with validation rules
         this.form = this.formBuilder.group({
-            name: ['', Validators.required],
+            full_name: ['', Validators.required],
             description: [''],
+            number: [''],
             status: [Status.ENABLED, Validators.required]
         });
 
@@ -104,4 +105,19 @@ export class AddEditComponent implements OnInit {
             ? this.authorService.update(this.id!, this.form.value)
             : this.authorService.create(this.form.value);
     }
+      //restrick the number
+      onKeypressnumber(event: KeyboardEvent) {
+        const charCode = event.charCode;
+        if (/[0-9]/.test(String.fromCharCode(charCode))) {
+          event.preventDefault();
+        }
+      }
+
+       // restrick the charater
+    onKeypress(event: KeyboardEvent) {
+        const charCode = event.charCode;
+        if ((charCode < 48) || (charCode > 57)) {
+          event.preventDefault();
+        }
+      }
 }

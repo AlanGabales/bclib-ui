@@ -27,11 +27,11 @@ import { TableUtil } from '@app/_helpers/table.util';
         MatIconModule
     ]
 })
-export class ListComponent implements OnInit {
+export class AuthorComponent implements OnInit {
 
     authors?: Author[];
     dataSource: any;
-    displayedColumns: string[] = ['id', 'name', 'status', 'action'];
+    displayedColumns: string[] = [ 'name', 'number', 'status', 'action'];
     @ViewChild(MatPaginator) paginator !:MatPaginator;
     @ViewChild(MatSort) sort !:MatSort;
     

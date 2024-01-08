@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '@app/environments/environment';
 import { Book } from '@app/_models';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
@@ -16,6 +17,14 @@ export class BookService {
 
     getAll() {
         return this.http.get<Book[]>(`${environment.apiUrl}/books`);
+    }
+    
+    getAllEnabled() {
+        return this.http.get<Book[]>(`${environment.apiUrl}/books/enabled`);
+    }
+
+    getAllGroupByName() {
+        return this.http.get<Book[]>(`${environment.apiUrl}/books/group-by-name`);
     }
 
     create(book: Book) {
@@ -32,4 +41,8 @@ export class BookService {
                 return x;
             }));
     }
+
+    getTotalBooks() {
+        return this.http.get<number>(`${environment.apiUrl}/total`);
+      }
 }

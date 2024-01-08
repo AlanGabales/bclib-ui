@@ -11,3 +11,26 @@ p {
 .mat-icon {
     transform: scale(1.5);
 }
+
+.sticky-toolbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Adjust the z-index as needed */
+  }
+
+  .sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
+  }
+  
+  .currentTime{
+    justify-content: center;
+    font-size: medium;
+    
+  }
+
+ 
+ 
